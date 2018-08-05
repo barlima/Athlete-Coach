@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
 
-  resources :coaches, only: %i(index)
+  resources :trainers, only: %i(edit)
+  resources :groups, except: %i(show destroy index)
 
   devise_for :accounts
 end
