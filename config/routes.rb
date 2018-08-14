@@ -2,11 +2,14 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#home'
 
-  get '/home', to: 'static_pages#home'
-  get '/help', to: 'static_pages#help'
+  get '/home',  to: 'static_pages#home'
+  get '/help',  to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
 
-  resources :trainers, only: %i(edit)
+  get '/trainer',      to: 'trainers#show'
+  get '/edit_trainer', to: 'trainers#edit'
+
+  # resources :trainers, only: %i(edit, show)
   resources :groups, except: %i(show destroy index)
 
   devise_for :accounts
