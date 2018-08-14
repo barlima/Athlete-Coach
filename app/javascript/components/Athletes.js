@@ -48,7 +48,7 @@ class Athletes extends React.Component {
   render () {
     return (
       <React.Fragment>
-        Greeting: {this.props.trainer_id}
+        {/* Greeting: {this.props.trainer_id} */}
           <form id="add_athlete" onSubmit={this.onSubmit}>
             <table>
               <thead>

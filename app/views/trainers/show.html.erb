@@ -1,15 +1,24 @@
 <% content_for :title, 'Athlete Coach' %>
 
-<%# ToDo: Make it tabs %>
+<ul class="nav nav-pills">
+  <li class="active"><a data-toggle="pill" href="#athletes">Athletes</a></li>
+  <li><a data-toggle="pill" href="#trainings">Trainings</a></li>
+  <li><a data-toggle="pill" href="#results">Results</a></li>
+</ul>
 
-<div>
-  <div>
+<div class="tab-content">
+  <div id="athletes" class="tab-pane in active">
+    <h2>Athletes</h2>
     <%= react_component("Athletes", { trainer_id: @trainer_id }) %>
   </div>
-  <div>
-    <%# ToDo: react_component for training %>
+  <div id="trainings" class="tab-pane fade">
+    <h2>Trainings</h2>
+    <%= react_component("Trainings", {}) %>
+    <p>Trainings content</p>
   </div>
-  <div>
-    <%# ToDo: react_component for results %>
+  <div id="results" class="tab-pane fade">
+    <h2>Results</h2>
+    <%= react_component("Results", {}) %>
+    <p>Results content</p>
   </div>
 </div>
