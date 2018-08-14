@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-class Trainer extends React.Component {
+class Athletes extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -14,6 +14,11 @@ class Trainer extends React.Component {
         }
       ]
     }
+  }
+
+  handleRemoveAthlete(athlete) {
+    // ToDo: Handle it (database way)
+    console.log(athlete);
   }
 
   onSubmit(e) {
@@ -61,6 +66,7 @@ class Trainer extends React.Component {
                       first_name={athlete.first_name}
                       last_name={athlete.last_name}
                       date_of_birth={athlete.date_of_birth}
+                      handleRemoveAthlete={this.handleRemoveAthlete}
                       key={athlete.last_name}
                     />
                   ))
@@ -79,20 +85,33 @@ class Trainer extends React.Component {
   }
 }
 
-Trainer.propTypes = {
+Athletes.propTypes = {
   trainer_id: PropTypes.number
 };
 
-const TableRecord = (props) => {
-  return (
-    <tr>
-      <td>{props.first_name}</td>
-      <td>{props.last_name}</td>
-      <td>{props.date_of_birth}</td>
-      {/* ToDo: Handle remove athlete */}
-      <td><button>Remove</button></td>
-    </tr>
-  );
+class TableRecord extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleRemoveAthlete = this.handleRemoveAthlete.bind(this);
+  }
+  handleRemoveAthlete() {
+    this.props.handleRemoveAthlete({
+      first_name: this.props.first_name,
+      last_name: this.props.last_name,
+      date_of_birth: this.props.date_of_birth
+    })
+  }
+  render() {
+    return (
+      <tr>
+        <td>{this.props.first_name}</td>
+        <td>{this.props.last_name}</td>
+        <td>{this.props.date_of_birth}</td>
+        {/* ToDo: Handle remove athlete */}
+        <td><button onClick={this.handleRemoveAthlete}>Remove</button></td>
+      </tr>
+    )
+  }
 };
 
-export default Trainer
+export default Athletes

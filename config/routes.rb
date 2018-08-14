@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get '/trainer',      to: 'trainers#show'
   get '/edit_trainer', to: 'trainers#edit'
 
-  # resources :trainers, only: %i(edit, show)
   resources :groups, except: %i(show destroy index)
 
   devise_for :accounts

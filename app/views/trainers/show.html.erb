@@ -1,4 +1,15 @@
 <% content_for :title, 'Athlete Coach' %>
 
-<%# ToDo: Add React component which will add Athletes %>
-<%= react_component("Trainer", { trainer_id: @trainer_id }) %>
+<%# ToDo: Make it tabs %>
+
+<div>
+  <div>
+    <%= react_component("Athletes", { trainer_id: @trainer_id }) %>
+  </div>
+  <div>
+    <%# ToDo: react_component for training %>
+  </div>
+  <div>
+    <%# ToDo: react_component for results %>
+  </div>
+</div>
