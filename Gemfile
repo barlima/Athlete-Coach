@@ -27,6 +27,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'webpacker'
 gem 'react-rails'
+gem 'graphql'
+gem 'graphiql-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -69,3 +71,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'graphiql-rails', group: :development
