@@ -5,6 +5,7 @@ class Athletes extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleRemoveAthlete = this.handleRemoveAthlete.bind(this);
     this.state = {
       athletes: [
         {
@@ -17,8 +18,16 @@ class Athletes extends React.Component {
   }
 
   handleRemoveAthlete(athlete) {
-    // ToDo: Handle it (database way)
+    // ToDo: Handle it (database way - remove by ID)
     console.log(athlete);
+    this.setState((prevState) => ({
+      athletes: prevState.athletes.filter((a) => (
+        athlete.first_name !== a.first_name ||
+        athlete.last_name !== a.last_name ||
+        athlete.date_of_birth !== a.date_of_birth
+      ))
+      // should be athlete.id !== a.id
+    }));
   }
 
   onSubmit(e) {
