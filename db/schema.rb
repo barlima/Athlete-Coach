@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_152237) do
+ActiveRecord::Schema.define(version: 2018_08_05_173525) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -30,12 +30,36 @@ ActiveRecord::Schema.define(version: 2018_08_05_152237) do
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "athletes", force: :cascade do |t|
+    t.string "name"
+    t.integer "trainer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trainer_id"], name: "index_athletes_on_trainer_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_groups_on_account_id"
+  end
+
+  create_table "professions", force: :cascade do |t|
+    t.string "name"
+    t.integer "athlete_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id"], name: "index_professions_on_athlete_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.string "value"
+    t.integer "profession_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profession_id"], name: "index_results_on_profession_id"
   end
 
   create_table "trainers", force: :cascade do |t|
