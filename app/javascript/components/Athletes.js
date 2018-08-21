@@ -19,7 +19,7 @@ class Athletes extends React.Component {
 
   handleRemoveAthlete(athlete) {
     // ToDo: Handle it (database way - remove by ID)
-    console.log(athlete);
+    // console.log(athlete);
     this.setState((prevState) => ({
       athletes: prevState.athletes.filter((a) => (
         athlete.first_name !== a.first_name ||
