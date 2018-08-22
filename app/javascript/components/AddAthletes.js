@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import Athletes from './Athletes.js'
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import TestQuery from './Query.js';
+import AthletesTable from './AthletesTable.js';
+import AthletesForm from './AthletesForm.js';
 
 const client = new ApolloClient({
   // By default, this client will send queries to the
@@ -20,8 +20,8 @@ class AddAthletes extends React.Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <Athletes trainer_id={this.props.trainer_id} />
-        <TestQuery trainer_id={this.props.trainer_id} />
+        <AthletesTable trainerId={this.props.trainer_id} />
+        <AthletesForm trainerId={this.props.trainer_id} />
       </ApolloProvider>
     )
   }
