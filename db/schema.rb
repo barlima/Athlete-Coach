@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_20_202420) do
+ActiveRecord::Schema.define(version: 2018_08_23_172747) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_202420) do
     t.string "first_name"
     t.string "last_name"
     t.date "date_of_birth"
+    t.string "sex"
     t.index ["trainer_id"], name: "index_athletes_on_trainer_id"
   end
 

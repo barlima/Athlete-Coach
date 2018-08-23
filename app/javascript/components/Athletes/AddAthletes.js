@@ -25,6 +25,7 @@ class AddAthletes extends React.Component {
         id
         first_name
         last_name
+        sex
         date_of_birth
       }
     }`
