@@ -13,6 +13,7 @@ class AthletesWrapper extends React.Component {
       athletes: prevState.athletes.concat([{
         firstName: athlete.first_name,
         lastName: athlete.last_name,
+        sex: athlete.sex,
         dateOfBirth: athlete.date_of_birth,
         id: athlete.id
       }])
@@ -31,6 +32,7 @@ class AthletesWrapper extends React.Component {
         id: athlete.id,
         firstName: athlete.first_name,
         lastName: athlete.last_name,
+        sex: athlete.sex,
         dateOfBirth: athlete.date_of_birth 
       }));
     

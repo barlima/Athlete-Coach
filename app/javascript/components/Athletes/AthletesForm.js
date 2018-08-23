@@ -9,12 +9,14 @@ class AthletesForm extends React.Component {
       mutation CreateAthlete(
         $first_name: String!, 
         $last_name: String!, 
-        $date_of_birth: String!, 
+        $date_of_birth: String!,
+        $sex: String!, 
         $trainer_id: ID!
       ) {
-          createAthlete(first_name: $first_name, last_name: $last_name, date_of_birth: $date_of_birth, trainer_id: $trainer_id) {
+          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth, trainer_id: $trainer_id) {
             first_name
             last_name
+            sex
             date_of_birth
             id
           }
@@ -32,15 +34,17 @@ class AthletesForm extends React.Component {
           <form id="add_athlete" onSubmit={e => {
             e.preventDefault();
 
-            const first_name = e.target.elements.first_name.value 
-            const last_name = e.target.elements.last_name.value 
-            const date_of_birth = e.target.elements.date_of_birth.value
+            const first_name = e.target.elements.first_name.value;
+            const last_name = e.target.elements.last_name.value;
+            const sex = e.target.elements.sex.value;
+            const date_of_birth = e.target.elements.date_of_birth.value;
 
-            if (first_name && last_name && date_of_birth) {
+            if (first_name && last_name && date_of_birth && sex) {
 
               createAthlete({ variables: {
                   first_name: first_name,
                   last_name: last_name,
+                  sex: sex,
                   date_of_birth: date_of_birth,
                   trainer_id: this.props.trainerId
                 } 

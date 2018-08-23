@@ -22,6 +22,7 @@ class AthletesTable extends React.Component {
               id={athlete.id}
               firstName={athlete.firstName}
               lastName={athlete.lastName}
+              sex={athlete.sex}
               dateOfBirth={athlete.dateOfBirth}
               handleRemove={this.props.handleRemove}
             />
@@ -43,7 +44,7 @@ class TableRecord extends React.Component {
       <tr>
         <td>{this.props.firstName}</td>
         <td>{this.props.lastName}</td>
-        <td></td>
+        <td>{this.props.sex[0]}</td>
         <td>{this.props.dateOfBirth}</td>
         <td>
           <AthleteRemove athleteId={this.props.id} handleRemove={this.props.handleRemove} />
