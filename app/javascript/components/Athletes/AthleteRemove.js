@@ -19,7 +19,10 @@ class AthleteRemove extends React.Component {
 
   render() {
     return (
-      <Mutation mutation={this.state.mutation}>
+      <Mutation 
+        mutation={this.state.mutation}
+        update={(store, {data: { removeAthlete }}) => this.props.handleRemove(removeAthlete.id)}  
+      >
         {(removeAthlete, { data }) => (
           <button onClick={e => {
             e.preventDefault();
@@ -37,7 +40,8 @@ class AthleteRemove extends React.Component {
 }
 
 AthleteRemove.propTypes = {
-  athleteId: PropTypes.string
+  athleteId: PropTypes.string,
+  handleRemove: PropTypes.func
 };
 
 export default AthleteRemove;

@@ -4,8 +4,9 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import AthletesTable from './AthletesTable.js';
-import AthletesForm from './AthletesForm.js';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import AthletesWrapper from './AthletesWrapper';
 
 const client = new ApolloClient({
   // By default, this client will send queries to the
@@ -17,18 +18,38 @@ const client = new ApolloClient({
 });
 
 class AddAthletes extends React.Component {
+  state = {
+    query: gql`
+    {
+      athletes(trainer_id: ${this.props.trainerId}) {
+        id
+        first_name
+        last_name
+        date_of_birth
+      }
+    }`
+  }
+
   render() {
-    return (
+    return(
       <ApolloProvider client={client}>
-        <AthletesTable trainerId={this.props.trainer_id} />
-        <AthletesForm trainerId={this.props.trainer_id} />
+        <Query query={this.state.query}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>
+              if (error) return <div>Error</div>
+              
+              return (
+                <AthletesWrapper trainerId={this.props.trainerId} athletes={data.athletes}/>
+              )
+            }}
+        </Query>
       </ApolloProvider>
-    )
+    );
   }
 }
 
 AddAthletes.propTypes = {
-  trainer_id: PropTypes.number
+  trainerId: PropTypes.number
 };
 
-export default AddAthletes
+export default AddAthletes;
