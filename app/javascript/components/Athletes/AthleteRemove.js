@@ -1,40 +1,31 @@
 import React from "react"
 import PropTypes from "prop-types"
-import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo';
+import AthleteRemoveModal from './AthleteRemoveModal';
 
 class AthleteRemove extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mutation: gql`
-        mutation RemoveAthlete($id: ID!) {
-          removeAthlete(id: $id) {
-            id
-          }
-        }
-      `
-    }
+  state = {
+    removeAthleteId: undefined
+  }
+
+  clearRemoveAthleteId = () => {
+    this.setState(() => ({ removeAthleteId: undefined }));
   }
 
   render() {
     return (
-      <Mutation 
-        mutation={this.state.mutation}
-        update={(store, {data: { removeAthlete }}) => this.props.handleRemove(removeAthlete.id)}  
-      >
-        {(removeAthlete, { data }) => (
-          <button onClick={e => {
-            e.preventDefault();
-            
-            removeAthlete({ variables: {
-              id: this.props.athleteId
-            }});
-          }}>
-            Remove
-          </button>
-        )}
-      </Mutation>
+      <div>
+        <button onClick={e => {
+          e.preventDefault();
+          this.setState(() => ({ removeAthleteId: this.props.athleteId }))
+        }}>
+          Remove
+        </button>
+        <AthleteRemoveModal 
+          removeAthleteId={this.state.removeAthleteId}
+          handleRemove={this.props.handleRemove}
+          clearRemoveAthleteId={this.clearRemoveAthleteId}
+        />
+      </div>
     )
   }
 }

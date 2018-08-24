@@ -21,7 +21,6 @@ class AthletesWrapper extends React.Component {
   }
 
   handleRemove = (id) => {
-    console.log(id);
     this.setState((prevState) => ({
       athletes: prevState.athletes.filter((athlete) => athlete.id !== id)
     }))
