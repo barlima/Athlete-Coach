@@ -1,4 +1,7 @@
-<% content_for :title, 'Home' %>
+<% content_for :title, 'Athlete Coach' %>
 
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% if current_account %>
+  <%= render 'accounts/index' %>
+<% else %>
+  <%= render 'static_pages/welcome' %>
+<% end %>

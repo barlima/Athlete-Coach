@@ -1,8 +1,8 @@
 class Group < ApplicationRecord
   belongs_to :account
-  has_many :trainers
+  has_one :trainer, dependent: :destroy
 
   validates :name, presence: true
 
-  accepts_nested_attributes_for :trainers
+  accepts_nested_attributes_for :trainer
 end

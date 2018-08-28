@@ -5,6 +5,20 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.fields_for :group do |g| %>
+      <%= g.label :group_name %><br />
+      <%= g.text_field :name %>
+
+      <div class="field">
+        <%= f.fields_for :trainer do |t| %>
+          <%= t.label :trainer_name %><br />
+          <%= t.text_field :name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
