@@ -5,8 +5,8 @@ import AthleteRemove from './AthleteRemove.js';
 class AthletesTable extends React.Component {
   render () {
     return (
-      <table>
-        <thead>
+      <table className="athletes-table">
+        <thead className="athletes-table__head">
           <tr>
             <th>First Name</th>
             <th>Last Name</th>

@@ -1,9 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  first_name: John
+  last_name: Locke
+  date_of_birth: 1970-10-20
+  sex: Male
   trainer: one
 
 two:
-  name: MyString
+  first_name: Jack
+  last_name: Shephard
+  date_of_birth: 1980-05-14
+  sex: Male
   trainer: two

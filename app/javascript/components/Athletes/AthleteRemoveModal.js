@@ -34,6 +34,7 @@ class AthleteRemoveModal extends React.Component {
                   id: this.props.removeAthleteId
                 }});
                 this.props.clearRemoveAthleteId();
+                Turbolinks.clearCache();
               }}
             >
               Yes
