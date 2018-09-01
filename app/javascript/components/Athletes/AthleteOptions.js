@@ -15,7 +15,7 @@ const RemoveButton = styled.button`
   color: ${green};
   font-size: ${mSize};
   height: 30px;
-  margin-right: 1px;
+  margin-left: 1px;
   padding: 0;
   width: 30px;
 
@@ -32,7 +32,7 @@ const EditButton = styled.button`
   color: ${green};
   font-size: ${mSize};
   height: 30px;
-  margin-left: 1px;
+  margin-right: 1px;
   padding: 0;
   width: 30px;
 
@@ -43,7 +43,7 @@ const EditButton = styled.button`
   }
 `;
 
-class AthleteRemove extends React.Component {
+class AthleteOptions extends React.Component {
   state = {
     removeAthleteId: undefined
   }
@@ -56,15 +56,17 @@ class AthleteRemove extends React.Component {
     return (
       <div>
         <Options>
+          <a href={"/athletes/show/" + this.props.athleteId} >
+            <EditButton>
+              <i className="material-icons">person</i>
+            </EditButton>
+          </a>
           <RemoveButton onClick={e => {
             e.preventDefault();
             this.setState(() => ({ removeAthleteId: this.props.athleteId }))
           }}>
             <i className="material-icons">delete</i>
           </RemoveButton>
-          <EditButton>
-            <i className="material-icons">edit</i>
-          </EditButton>
         </Options>
         <AthleteRemoveModal 
           removeAthleteId={this.state.removeAthleteId}
@@ -76,9 +78,9 @@ class AthleteRemove extends React.Component {
   }
 }
 
-AthleteRemove.propTypes = {
+AthleteOptions.propTypes = {
   athleteId: PropTypes.string,
   handleRemove: PropTypes.func
 };
 
-export default AthleteRemove;
+export default AthleteOptions;

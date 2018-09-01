@@ -1,7 +1,7 @@
 import React from "react"
 import styled from 'styled-components';
 import PropTypes from "prop-types"
-import AthleteRemove from './AthleteRemove.js';
+import AthleteOptions from './AthleteOptions.js';
 import { red, darkRed, green, darkGreen, sSize, mSize, xmSize, lSize } from '../../styles/Settings';
 
 const Table = styled.div`
@@ -48,7 +48,7 @@ class TableRecord extends React.Component {
           <div className="sex">{this.props.sex[0]}</div>
           <div className="column">{this.props.dateOfBirth}</div>
           <div className="options">
-            <AthleteRemove athleteId={this.props.id} handleRemove={this.props.handleRemove} />
+            <AthleteOptions athleteId={this.props.id} handleRemove={this.props.handleRemove} />
           </div>
         </Record>
       </Table>

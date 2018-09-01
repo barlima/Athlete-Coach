@@ -63,8 +63,8 @@ class Dashboard extends React.Component {
             <Navigation to="/results" activeStyle={navActive}>Results</Navigation>
           </Panel>
           <Switch>
-            <Route path="/" render={() => <Athletes trainerId={this.props.trainerId}/>} exact={true}/>
-            <Route path="/athletes" render={() => <Athletes trainerId={this.props.trainerId}/>} />
+            <Route path="/" render={() => <Athletes trainerId={this.props.trainerId}/>} exact={true} />
+            <Route path="/athletes" render={() => <Athletes trainerId={this.props.trainerId}/>} exact={true} />
             <Route path="/trainings" component={Trainings} />
             <Route path="/results" component={Results} />
           </Switch>
