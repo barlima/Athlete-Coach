@@ -10,7 +10,7 @@
       <%= g.text_field :name %>
 
       <div class="field">
-        <%= f.fields_for :trainer do |t| %>
+        <%= g.fields_for :trainer do |t| %>
           <%= t.label :trainer_name %><br />
           <%= t.text_field :name %>
         <% end %>

@@ -1,3 +1,31 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.dashboard__nav {
+  background: $red;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $m-size;
+
+  li {
+    width: calc(100% / 3);
+
+    a {     
+      border-bottom: 0.3rem solid $dark-red;
+      color: white;
+      display: inline-block;  
+      padding: $s-size;    
+      position: relative;   
+      text-align: center; 
+      text-decoration: none;
+      width: 100%;
+    }
+
+    a.active {
+      border: none;
+      border-bottom: 0.3rem solid $green;
+    }
+  }
+}

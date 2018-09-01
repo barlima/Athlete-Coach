@@ -1,21 +1,53 @@
 import React from "react"
+import styled from 'styled-components';
 import PropTypes from "prop-types"
-import AthleteRemove from './AthleteRemove.js';
+import TableRecord from './TableRecord.js';
+import { red, darkRed, green, darkGreen, sSize, mSize, xmSize, lSize } from '../../styles/Settings';
+
+const Table = styled.div`
+  background: ${darkRed};
+  padding: ${sSize} 0;
+  width: 100%;
+`;
+
+const Head = styled.div`
+  border-bottom: 0.3rem solid ${red};
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding: 0 ${sSize};
+
+  div {
+    margin: 0 ${sSize} 0 ${sSize};
+    min-width: 200px;
+    width: 25%;
+  }
+
+  div.sex {
+    margin: 0;
+    min-width: 50px;
+    width: 50px;
+  }
+
+  div.options {
+    margin: 0;
+    min-width: 0;
+    width: 61px;
+  }
+`;
 
 class AthletesTable extends React.Component {
   render () {
     return (
-      <table className="athletes-table">
-        <thead className="athletes-table__head">
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Sex</th>
-            <th>Date of Birth</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table>
+          <Head>
+            <div>Last Name</div>
+            <div>First Name</div>
+            <div className="sex">Sex</div>
+            <div>Date of Birth</div>
+            <div className="options"></div>
+          </Head>
           {this.props.athletes.map((athlete) => (
             <TableRecord 
               key={athlete.id}
@@ -27,8 +59,7 @@ class AthletesTable extends React.Component {
               handleRemove={this.props.handleRemove}
             />
           ))}
-        </tbody>
-      </table>
+      </Table>
     )
   }
 }
@@ -37,25 +68,5 @@ AthletesTable.propTypes = {
   athletes: PropTypes.array,
   handleRemove: PropTypes.func
 };
-
-class TableRecord extends React.Component {
-  render() {
-    return (
-      <tr>
-        <td>{this.props.firstName}</td>
-        <td>{this.props.lastName}</td>
-        <td>{this.props.sex[0]}</td>
-        <td>{this.props.dateOfBirth}</td>
-        <td>
-          <AthleteRemove athleteId={this.props.id} handleRemove={this.props.handleRemove} />
-        </td>
-      </tr>
-    )
-  }
-};
-
-TableRecord.propTypes = {
-  handleRemove: PropTypes.func
-}
 
 export default AthletesTable;

@@ -1,0 +1,25 @@
+.header {
+  background: $dark-red;
+  border-bottom: 0.3rem solid $red;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $l-size;
+  min-width: 100rem;
+  padding: $m-size $xl-size;
+}
+
+.header__title > a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.header__group {
+  color: white;
+}
+
+.header__options > a {
+  color: white;
+  text-decoration: none;
+}

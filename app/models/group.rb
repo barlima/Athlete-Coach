@@ -5,4 +5,8 @@ class Group < ApplicationRecord
   validates :name, presence: true
 
   accepts_nested_attributes_for :trainer
+
+  after_initialize do
+    build_trainer if new_record? && trainer.blank?
+  end
 end

@@ -7,7 +7,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # set context
+      current_trainer: current_trainer,
     }
     result = CoachSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -17,6 +17,10 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def current_trainer
+    current_account.group.trainer if current_account
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
