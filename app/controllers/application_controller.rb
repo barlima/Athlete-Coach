@@ -6,15 +6,24 @@ class ApplicationController < ActionController::Base
 
   def after_sign_up_path_for(resource)
     new_group_path
-  end
+  end 
 
-  private 
+  private
 
   def get_trainer_id
     current_account.group.trainer.id 
   end
 
+  def current_account
+    Account.find_by(params[:id])
+  end
+
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [{ group_attributes: :name }])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [{ 
+      group_attributes: [
+        :name,
+        trainer_attributes: :name
+      ]
+    }])
   end
 end

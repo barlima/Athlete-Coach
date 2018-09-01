@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   get '/help',  to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
 
-  get '/trainer',      to: 'trainers#show'
-  get '/edit_trainer', to: 'trainers#edit'
+  # --- React Router ---
+  get '/athletes', to: 'static_pages#home'
+  get '/trainings', to: 'static_pages#home'
+  get '/results', to: 'static_pages#home'
+  # --- React Router ---
 
   resources :groups, except: %i(show destroy index)
 

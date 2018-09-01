@@ -13,9 +13,9 @@ Types::QueryType = GraphQL::ObjectType.define do
   end
 
   field :athletes, !types[Types::AthleteType] do
-    argument :trainer_id, types.ID
+    # argument :trainer_id, types.ID
     resolve -> (obj, args, ctx) {
-      Athlete.where(trainer_id: args[:trainer_id]).order(created_at: :desc)
+      Athlete.where(trainer_id: ctx[:current_trainer].id).order(created_at: :desc)
     }
   end
 end

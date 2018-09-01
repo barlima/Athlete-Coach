@@ -8,13 +8,15 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
 
   <body>
     <%= render 'layouts/header' %>
     <%= render 'shared/devise_messages' %>
 
-    <div class="container">
+    <div class="sixty">
       <%= yield %>
     </div>
   </body>

@@ -1,7 +1,55 @@
 import React from "react"
+import styled from 'styled-components';
 import PropTypes from "prop-types"
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import { red, darkRed, green, darkGreen, sSize, mSize, lSize } from '../../styles/Settings';
+
+const Form = styled.form`
+  background: ${darkRed};
+  border-bottom: 0.3rem solid ${red};
+  display: flex;
+  justify-content: space-between;
+  padding: ${sSize};
+`
+
+const Input = styled.input`
+  background: ${darkRed};
+  border: none;
+  border-bottom: 1px solid ${red};
+  box-sizing: border-box;
+  color: white;
+  margin: 0 ${sSize} 0 ${sSize};
+  min-width: 200px;
+  width: 25%;
+  
+  &:focus {
+    border: none;
+    border-bottom: 1px solid ${green};
+  }
+`;
+
+const Button = styled.button`
+  background: ${darkGreen};
+  border: none;
+  color: ${green};
+  font-size: ${mSize};
+  height: 30px;
+  min-width: 61px;
+  padding: 0;
+  width: 30px;
+
+  i {
+    font-weight: bold;
+    margin-top: 3px;
+    padding: 0;
+    width: 50px;
+  }
+`;
+
+const Span = styled.span`
+  color: ${green};
+`
 
 class AthletesForm extends React.Component {
   state = {
@@ -11,9 +59,8 @@ class AthletesForm extends React.Component {
         $last_name: String!, 
         $date_of_birth: String!,
         $sex: String!, 
-        $trainer_id: ID!
       ) {
-          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth, trainer_id: $trainer_id) {
+          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth) {
             first_name
             last_name
             sex
@@ -31,7 +78,7 @@ class AthletesForm extends React.Component {
         update={(store, {data: { createAthlete }}) => this.props.onSubmit(createAthlete)}
       >
         {(createAthlete, { data }) => (
-          <form id="add_athlete" onSubmit={e => {
+          <Form id="add_athlete" onSubmit={e => {
             e.preventDefault();
 
             const first_name = e.target.elements.first_name.value;
@@ -45,8 +92,7 @@ class AthletesForm extends React.Component {
                   first_name: first_name,
                   last_name: last_name,
                   sex: sex,
-                  date_of_birth: date_of_birth,
-                  trainer_id: this.props.trainerId
+                  date_of_birth: date_of_birth
                 } 
               });
             
@@ -54,24 +100,20 @@ class AthletesForm extends React.Component {
               e.target.elements.last_name.value = '';
               e.target.elements.date_of_birth.value = '';
             }
-          }}>
-            <table>
-              <tbody>
-                <tr>  
-                  <td><input type="text" name="first_name" form="add_athlete"/></td>
-                  <td><input type="text" name="last_name" form="add_athlete" /></td>
-                  <td>
-                    <select name="sex">
-                      <option value="Male">M</option>
-                      <option value="Female">F</option>
-                    </select>
-                  </td>
-                  <td><input type="text" name="date_of_birth" form="add_athlete" /></td>
-                  <td><button form="add_athlete">Add</button></td>  
-                </tr>
-              </tbody>
-            </table>
-          </form>
+          }}>  
+            <Input type="text" name="last_name" placeholder="Last Name" form="add_athlete" />
+            <Input type="text" name="first_name" placeholder="First Name" form="add_athlete"/>
+            
+              <select name="sex">
+                <option value="Male">M</option>
+                <option value="Female">F</option>
+              </select>
+            
+            <Input type="text" name="date_of_birth" placeholder="Date of Birth" form="add_athlete" />
+            <Button form="add_athlete">
+              <i className="material-icons">add</i>
+            </Button>
+          </Form>
         )}
       </Mutation>
     );
