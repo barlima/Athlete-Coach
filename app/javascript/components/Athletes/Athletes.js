@@ -8,7 +8,7 @@ class Athletes extends React.Component {
   state = {
     query: gql`
     {
-      athletes {
+      athletes(trainer_id: ${this.props.trainerId}) {
         id
         first_name
         last_name

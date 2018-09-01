@@ -7,6 +7,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
+      current_account: current_account,
       current_trainer: current_trainer,
     }
     result = CoachSchema.execute(query, variables: variables, context: context, operation_name: operation_name)

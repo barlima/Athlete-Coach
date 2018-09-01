@@ -5,17 +5,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_up_path_for(resource)
-    new_group_path
+    root_path
   end 
 
   private
 
   def get_trainer_id
     current_account.group.trainer.id 
-  end
-
-  def current_account
-    Account.find_by(params[:id])
   end
 
   def configure_permitted_parameters

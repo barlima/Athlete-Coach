@@ -59,8 +59,9 @@ class AthletesForm extends React.Component {
         $last_name: String!, 
         $date_of_birth: String!,
         $sex: String!, 
+        $trainer_id: ID!
       ) {
-          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth) {
+          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth, trainer_id: $trainer_id) {
             first_name
             last_name
             sex
@@ -92,7 +93,8 @@ class AthletesForm extends React.Component {
                   first_name: first_name,
                   last_name: last_name,
                   sex: sex,
-                  date_of_birth: date_of_birth
+                  date_of_birth: date_of_birth,
+                  trainer_id: this.props.trainerId
                 } 
               });
             
