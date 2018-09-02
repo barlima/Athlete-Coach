@@ -58,10 +58,9 @@ class AthletesForm extends React.Component {
         $first_name: String!, 
         $last_name: String!, 
         $date_of_birth: String!,
-        $sex: String!, 
-        $trainer_id: ID!
+        $sex: String!,
       ) {
-          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth, trainer_id: $trainer_id) {
+          createAthlete(first_name: $first_name, last_name: $last_name, sex: $sex, date_of_birth: $date_of_birth) {
             first_name
             last_name
             sex
@@ -93,8 +92,7 @@ class AthletesForm extends React.Component {
                   first_name: first_name,
                   last_name: last_name,
                   sex: sex,
-                  date_of_birth: date_of_birth,
-                  trainer_id: this.props.trainerId
+                  date_of_birth: date_of_birth
                 } 
               });
             
@@ -121,10 +119,5 @@ class AthletesForm extends React.Component {
     );
   }
 }
-
-AthletesForm.propTypes = {
-  trainerId: PropTypes.number
-};
-
 
 export default AthletesForm;

@@ -1,5 +1,6 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from "react";
+import PropTypes from "prop-types";
+import TrainingsCalendar from './TrainingsCalendar';
 
 class Trainings extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class Trainings extends React.Component {
   }
   render() {
     return (
-      <p>Trainings</p>
+      <TrainingsCalendar />
     )
   }
 }

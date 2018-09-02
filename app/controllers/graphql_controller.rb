@@ -1,6 +1,4 @@
 class GraphqlController < ApplicationController
-  
-  protect_from_forgery with: :null_session
 
   def execute
     variables = ensure_hash(params[:variables])
@@ -8,7 +6,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       current_account: current_account,
-      current_trainer: current_trainer,
+      trainer_id: trainer_id,
     }
     result = CoachSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -19,8 +17,8 @@ class GraphqlController < ApplicationController
 
   private
 
-  def current_trainer
-    current_account.group.trainer if current_account
+  def trainer_id
+    current_account.group.trainer.id if current_account
   end
 
   # Handle form data, JSON body, or a blank value

@@ -8,7 +8,7 @@ class Athletes extends React.Component {
   state = {
     query: gql`
     {
-      athletes(trainer_id: ${this.props.trainerId}) {
+      athletes {
         id
         first_name
         last_name
@@ -26,16 +26,12 @@ class Athletes extends React.Component {
             if (error) return <div>Error</div>
             
             return (
-              <AthletesWrapper trainerId={this.props.trainerId} athletes={data.athletes}/>
+              <AthletesWrapper athletes={data.athletes}/>
             )
           }}
       </Query>
     );
   }
 }
-
-Athletes.propTypes = {
-  trainerId: PropTypes.number
-};
 
 export default Athletes;

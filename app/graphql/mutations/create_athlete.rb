@@ -3,7 +3,6 @@ class Mutations::CreateAthlete < GraphQL::Function
   argument :last_name, !types.String
   argument :sex, !types.String
   argument :date_of_birth, !types.String
-  argument :trainer_id, !types.ID
 
   type Types::AthleteType
 
@@ -11,15 +10,14 @@ class Mutations::CreateAthlete < GraphQL::Function
     return unless (args[:first_name] && 
                    args[:last_name] && 
                    args[:date_of_birth] && 
-                   args[:sex] &&
-                   args[:trainer_id])
+                   args[:sex])
     
     athlete = Athlete.new(
                 first_name: args[:first_name],
                 last_name: args[:last_name],
                 sex: args[:sex],
                 date_of_birth: args[:date_of_birth],
-                trainer_id: args[:trainer_id]
+                trainer_id: ctx[:trainer_id]
               )
     
     return unless athlete.valid?

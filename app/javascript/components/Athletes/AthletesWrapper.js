@@ -42,14 +42,13 @@ class AthletesWrapper extends React.Component {
     return (
       <div>
         <AthletesTable athletes={this.state.athletes} handleRemove={this.handleRemove} />
-        <AthletesForm onSubmit={this.onSubmit} trainerId={this.props.trainerId} />
+        <AthletesForm onSubmit={this.onSubmit} />
       </div>
     )
   }
 }
 
 AthletesWrapper.propTypes = {
-  trainerId: PropTypes.number,
   athletes: PropTypes.array
 };
 
