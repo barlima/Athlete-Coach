@@ -16,6 +16,7 @@ class AvailableAthletes extends React.Component {
             />
           )
         })}
+        {this.props.athletes.length === 0 && <p>No more available athletes.</p>}
       </div>
     )
   }

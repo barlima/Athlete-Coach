@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import AvailableAthletes from './AvailableAthletes';
 import TrainingGroup from './TrainingGroup';
+import GroupDiv from './GroupDiv';
 
 const Path = styled.div`
   display: flex;
@@ -14,6 +15,11 @@ const Path = styled.div`
 const GroupsPanel = styled.div`
   display: flex;
   justify-content: space-around;
+`
+
+const ReadyGroups = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 class TrainingGroups extends React.Component {
@@ -30,6 +36,44 @@ class TrainingGroups extends React.Component {
       }
     `,
     movedAthletes: [],
+    chosenAthletes: [],
+    groups: []
+  }
+
+  createGroups = () => {
+    let trainingGroups = [];
+    let group = undefined;
+    const groupsCount = this.state.groups.length;
+
+    for (let i = 0; i < groupsCount; i++) {
+      group = this.state.groups[i];
+      trainingGroups.push(
+        <GroupDiv group={group}/>
+        // <div key={i}>
+        //   <h3>{group.name}</h3>
+        //   {group.athletes.map((athlete) => {
+        //     return (
+        //       <p key={athlete.id}>
+        //         {`${athlete.first_name} ${athlete.last_name}`}
+        //       </p>
+        //     )
+        //   })}
+        // </div>
+      )
+    }
+
+    trainingGroups.push(
+      <TrainingGroup 
+        athletes={this.state.movedAthletes} 
+        clearAll={this.clearAll}
+        individualize={this.individualize}
+        key='empty form'
+        moveAthleteBack={this.moveAthleteBack}
+        setGroup={this.setGroup} 
+      />
+    )
+
+    return trainingGroups;
   }
 
   moveAthlete = (athlete) => {
@@ -48,12 +92,50 @@ class TrainingGroups extends React.Component {
     this.setState(() => ({ movedAthletes: [] }));
   }
 
+  setGroup = (groupName, athletes) => {
+    // console.log(groupName);
+    this.setState((prevState) => ({
+      groups: prevState.groups.concat({
+        name: groupName,
+        athletes: [...athletes]
+      }),
+      chosenAthletes: prevState.chosenAthletes.concat(prevState.movedAthletes),
+      movedAthletes: []
+    }));
+  }
+
+  individualize = () => {
+    console.log(this.state.movedAthletes);
+
+    const newGroups = this.state.movedAthletes.map((athlete) => ({
+      name: `${athlete.first_name} ${athlete.last_name}`,
+      athletes: [athlete]
+    }))
+
+    console.log(newGroups);
+
+    this.setState((prevState) => ({
+      groups: prevState.groups.concat(newGroups),
+      chosenAthletes: prevState.chosenAthletes.concat(prevState.movedAthletes),
+      movedAthletes: []
+    }));
+  }
+
   unassignedAthletes = (athletes) => {
-    return athletes.filter((athlete) => {
+    const withoutMovedAthletes = athletes.filter((athlete) => {
       return !this.state.movedAthletes.map((a) => (
         a.id
       )).includes(athlete.id);
     });
+    return withoutMovedAthletes.filter((athlete) => {
+      return !this.state.chosenAthletes.map((a) => (
+        a.id
+      )).includes(athlete.id);
+    })
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
   }
 
   render() {
@@ -72,11 +154,9 @@ class TrainingGroups extends React.Component {
               )
             }}
           </Query>
-          <TrainingGroup 
-            athletes={this.state.movedAthletes} 
-            clearAll={this.clearAll}
-            moveAthleteBack={this.moveAthleteBack} 
-          />
+          <ReadyGroups>
+            {this.createGroups()}
+          </ReadyGroups>
         </GroupsPanel>
         <Link to={`/trainings/new/${this.props.match.params.date}`}>Save</Link>
       </div>

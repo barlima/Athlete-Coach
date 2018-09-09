@@ -30,10 +30,32 @@ const Athlete = styled.div`
 
 class TrainingGroup extends React.Component {
 
+  state = {
+    groupName: ''
+  }
+
+  setGroup = (e) => {
+    e.preventDefault();
+    const athletesIds = this.props.athletes;
+    const groupName = e.target.elements.groupName.value;
+
+    if (groupName !== null && groupName.replace(/\s/g,'') !== '') {
+      this.props.setGroup(groupName, athletesIds);
+      e.target.elements.groupName.value = '';
+    } else {
+      e.target.elements.groupName.value = '';
+      e.target.elements.groupName.placeholder = 'Group name can\'t be blank!';
+    }
+  }
+
   render() {
     return(
-      <div>
-        <input type='text' placeholder="Group Name"/>
+      <form onSubmit={this.setGroup}>
+        <input 
+          type='text' 
+          name='groupName' 
+          placeholder="Group Name"
+        />
         {this.props.athletes.map((athlete) => (
           <AthleteDiv
             athlete={athlete}
@@ -43,11 +65,11 @@ class TrainingGroup extends React.Component {
           />
         ))}
         <div>
-          { this.props.athletes.length > 0 && <button>Set group</button> }
-          { this.props.athletes.length > 1 && <button>Individualize</button> }
-          { this.props.athletes.length > 1 && <button onClick={this.props.clearAll}>Clear All</button> }
+          <input type='submit' value='Set group' disabled={!this.props.athletes.length} />
+          <button type='button' onClick={this.props.individualize} disabled={!this.props.athletes.length}>Individualize</button>
+          <button type='button' onClick={this.props.clearAll} disabled={!this.props.athletes.length}>Clear All</button>
         </div>
-      </div>
+      </form>
     );
   }
 }
