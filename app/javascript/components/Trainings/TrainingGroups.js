@@ -7,10 +7,7 @@ import { Query } from 'react-apollo';
 import AvailableAthletes from './AvailableAthletes';
 import TrainingGroup from './TrainingGroup';
 import GroupDiv from './GroupDiv';
-
-const Path = styled.div`
-  display: flex;
-`
+import SaveTrainingGroups from './SaveTrainingGroups';
 
 const GroupsPanel = styled.div`
   display: flex;
@@ -48,17 +45,11 @@ class TrainingGroups extends React.Component {
     for (let i = 0; i < groupsCount; i++) {
       group = this.state.groups[i];
       trainingGroups.push(
-        <GroupDiv group={group}/>
-        // <div key={i}>
-        //   <h3>{group.name}</h3>
-        //   {group.athletes.map((athlete) => {
-        //     return (
-        //       <p key={athlete.id}>
-        //         {`${athlete.first_name} ${athlete.last_name}`}
-        //       </p>
-        //     )
-        //   })}
-        // </div>
+        <GroupDiv 
+          group={group}
+          key={group.name}
+          removeGroup={this.removeGroup}  
+        />
       )
     }
 
@@ -74,6 +65,19 @@ class TrainingGroups extends React.Component {
     )
 
     return trainingGroups;
+  }
+
+  removeGroup = (group) => {
+    this.setState((prevState) => ({
+      groups: prevState.groups.filter((g) => ( g.name !== group.name )),
+      chosenAthletes: prevState.chosenAthletes.filter((a) => ( 
+        !group.athletes.map((ath) => ath.id).includes(a.id) 
+      ))
+    })); 
+  }
+
+  saveGroups = () => {
+    console.log(this.state.groups);
   }
 
   moveAthlete = (athlete) => {
@@ -135,7 +139,7 @@ class TrainingGroups extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   render() {
@@ -158,7 +162,10 @@ class TrainingGroups extends React.Component {
             {this.createGroups()}
           </ReadyGroups>
         </GroupsPanel>
-        <Link to={`/trainings/new/${this.props.match.params.date}`}>Save</Link>
+        <SaveTrainingGroups 
+          path={`/trainings/new/${this.props.match.params.date}`}
+          groups={this.state.groups}
+        />
       </div>
     )
   }

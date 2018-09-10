@@ -24,6 +24,7 @@ const GroupHeader = styled.div`
   justify-content: space-between;
   padding: 0.7rem;
   padding-top: 0.9rem;
+  padding-bottom: 0;
 
   h3 {
     flex: 1;
@@ -35,15 +36,34 @@ const GroupHeader = styled.div`
   }
 `
 
+const RemoveButton = styled.button`
+  background: ${darkRed};
+  border: none;
+  color: white;
+  font-size: ${mSize};
+  padding: 0;
+
+  i {
+    // font-weight: bold;
+    margin-bottom: 3px;
+    padding: 0;
+  }
+`;
+
 class GroupDiv extends React.Component {
+
+  remove = () => { 
+    this.props.removeGroup(this.props.group);
+  }
+
   render() {
     return(
       <GroupWrapper>
         <GroupHeader>
           <h3>{this.props.group.name}</h3>
-          {/* <button> */}
-            <i className="material-icons">edit</i>
-          {/* </button> */}
+          <RemoveButton onClick={this.remove}>
+            <i className="material-icons">delete</i>
+          </RemoveButton>
         </GroupHeader>
         {this.props.group.athletes.map((athlete) => {
           return (

@@ -3,6 +3,7 @@ class TrainingsController < ApplicationController
   
   def new
     @trainer_id = current_account.group.trainer.id
+    # ToDo: get groups
   end
 
   def edit
