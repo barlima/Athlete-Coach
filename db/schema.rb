@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_172747) do
+ActiveRecord::Schema.define(version: 2018_09_11_152402) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2018_08_23_172747) do
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "athlete_training_groups", force: :cascade do |t|
+    t.integer "athlete_id"
+    t.integer "training_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id", "training_group_id"], name: "athlete_training_group"
+  end
+
   create_table "athletes", force: :cascade do |t|
     t.integer "trainer_id"
     t.datetime "created_at", null: false
@@ -39,6 +47,19 @@ ActiveRecord::Schema.define(version: 2018_08_23_172747) do
     t.date "date_of_birth"
     t.string "sex"
     t.index ["trainer_id"], name: "index_athletes_on_trainer_id"
+  end
+
+  create_table "athletes_training_groups", id: false, force: :cascade do |t|
+    t.integer "athlete_id", null: false
+    t.integer "training_group_id", null: false
+    t.index ["athlete_id", "training_group_id"], name: "index_athlete_training_group_id"
+  end
+
+  create_table "athletes_trainings", id: false, force: :cascade do |t|
+    t.integer "training_id", null: false
+    t.integer "athlete_id", null: false
+    t.index ["athlete_id"], name: "index_athletes_trainings_on_athlete_id"
+    t.index ["training_id"], name: "index_athletes_trainings_on_training_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -71,6 +92,22 @@ ActiveRecord::Schema.define(version: 2018_08_23_172747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_trainers_on_group_id"
+  end
+
+  create_table "training_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "training_id"
+    t.index ["training_id"], name: "index_training_groups_on_training_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "name"
+    t.integer "trainer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trainer_id"], name: "index_trainings_on_trainer_id"
   end
 
 end

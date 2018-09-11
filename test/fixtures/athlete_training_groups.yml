@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  athlete_id: 1
+  training_group_id: 1
+
+two:
+  athlete_id: 1
+  training_group_id: 1
