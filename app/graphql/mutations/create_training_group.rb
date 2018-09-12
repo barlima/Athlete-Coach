@@ -1,5 +1,6 @@
 class Mutations::CreateTrainingGroup < GraphQL::Function
   argument :name, !types.String
+  # argument :training_id, types.Int
   argument :athlete_ids, types[types.Int]
 
   type Types::TrainingGroupType
@@ -10,18 +11,15 @@ class Mutations::CreateTrainingGroup < GraphQL::Function
 
     athlete_ids = args[:athlete_ids]
 
-    training = Training.create(name: 'unknown', trainer_id: ctx[:trainer_id])
-    training_group = TrainingGroup.create(name: args[:name], training_id: training.id)
+    training_group = TrainingGroup.create(name: args[:name], trainer_id: ctx[:trainer_id])
 
     return unless training_group.valid?
 
     athlete_ids.each do |id|
-      if Athlete.find_by_id(id)
-        a = AthleteTrainingGroup.create(
-          training_group_id: training_group.id,
-          athlete_id: id
-        )
-      end
+      a = AthleteTrainingGroup.create(
+        training_group_id: training_group.id,
+        athlete_id: id
+      )
     end
 
     OpenStruct.new({

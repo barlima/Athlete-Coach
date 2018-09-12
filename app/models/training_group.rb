@@ -1,9 +1,10 @@
 class TrainingGroup < ApplicationRecord
-  belongs_to :training
+  belongs_to :trainer
+  has_one :training
   has_many :athlete_training_groups
   has_many :athletes, through: :athlete_training_groups
 
-  # validate :has_unique_athletes
+  validate :has_unique_athletes
 
   private
 
