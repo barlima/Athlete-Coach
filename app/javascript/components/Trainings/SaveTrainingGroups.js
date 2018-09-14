@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
@@ -7,9 +7,10 @@ class SaveTrainingGroups extends React.Component {
   state = {
     mutation: gql`
       mutation CreateTrainingGroups(
+        $training_param: String!,
         $groups: [TrainingGroupInput]
       ) {
-        createTrainingGroups(groups: $groups)
+        createTrainingGroups(groups: $groups, training_param: $training_param)
       }
     `
   }
@@ -20,37 +21,36 @@ class SaveTrainingGroups extends React.Component {
 
   render() {
     return (
-      <div>
-        <Mutation mutation={this.state.mutation} >
-          {(createTrainingGroups, { data, loading, error }) => (
-            <form onSubmit={e => {
-              e.preventDefault();
+      <Mutation 
+        mutation={this.state.mutation} 
+      >
+        {(createTrainingGroups, { data, loading, error }) => (
+          <form onSubmit={e => {
+            e.preventDefault();
 
-              const trainingGroups = this.props.groups.map((g) => {
-                return({
-                  name: g.name,
-                  athlete_ids: g.athletes.map((a) => parseInt(a.id))
-                })
+            const trainingGroups = this.props.groups.map((g) => {
+              return({
+                name: g.name,
+                athlete_ids: g.athletes.map((a) => parseInt(a.id))
               })
+            });
 
-              console.log(trainingGroups);
+            createTrainingGroups({ variables: {
+                groups: trainingGroups,
+                training_param: this.props.trainingParam
+              }
+            }).catch((res) => {
+              console.log(res.graphQLErrors);
+            });
 
-              createTrainingGroups({ variables: {
-                  groups: trainingGroups
-                }
-              }).catch((res) => {
-                console.log(res.graphQLErrors);
-              })
-
-            }}>
-              <button type='submit'>Save</button>
-            </form>
-            // <Link type="submit" to={this.props.path} onClick={this.saveGroups}>Save</Link>
-          )}
-        </Mutation>
-      </div>
+            this.props.history.push(`/trainings/new/${this.props.trainingParam}`);
+          }}>
+            <button type='submit'>Save</button>
+          </form>
+        )}
+      </Mutation>
     )
   }
 }
 
-export default SaveTrainingGroups;
+export default withRouter(SaveTrainingGroups);

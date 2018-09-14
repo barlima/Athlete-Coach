@@ -1,6 +1,7 @@
 class TrainingGroup < ApplicationRecord
   belongs_to :trainer
-  has_one :training
+  belongs_to :training
+  has_one :training_detail
   has_many :athlete_training_groups
   has_many :athletes, through: :athlete_training_groups
 

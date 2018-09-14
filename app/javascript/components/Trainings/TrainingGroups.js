@@ -109,14 +109,10 @@ class TrainingGroups extends React.Component {
   }
 
   individualize = () => {
-    console.log(this.state.movedAthletes);
-
     const newGroups = this.state.movedAthletes.map((athlete) => ({
       name: `${athlete.first_name} ${athlete.last_name}`,
       athletes: [athlete]
     }))
-
-    console.log(newGroups);
 
     this.setState((prevState) => ({
       groups: prevState.groups.concat(newGroups),
@@ -163,7 +159,7 @@ class TrainingGroups extends React.Component {
           </ReadyGroups>
         </GroupsPanel>
         <SaveTrainingGroups 
-          path={`/trainings/new/${this.props.match.params.date}`}
+          trainingParam={this.props.match.params.date}
           groups={this.state.groups}
         />
       </div>
