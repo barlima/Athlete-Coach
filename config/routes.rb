@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/trainings/new/:date/groups', as: "new_training", to: 'trainings#new'
   get '/trainings/new/:date', to: 'trainings#new'
+  get '/trainings/new/:date/:id', to: 'trainings#new'
   get '/trainings/edit/:date', to: 'trainings#edit'
 
   # --- React Router ---

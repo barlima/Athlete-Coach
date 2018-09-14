@@ -23,6 +23,9 @@ class SaveTrainingGroups extends React.Component {
     return (
       <Mutation 
         mutation={this.state.mutation} 
+        update={() => {
+          this.props.history.push(`/trainings/new/${this.props.match.params.date}`)
+        }}
       >
         {(createTrainingGroups, { data, loading, error }) => (
           <form onSubmit={e => {
@@ -42,8 +45,6 @@ class SaveTrainingGroups extends React.Component {
             }).catch((res) => {
               console.log(res.graphQLErrors);
             });
-
-            this.props.history.push(`/trainings/new/${this.props.trainingParam}`);
           }}>
             <button type='submit'>Save</button>
           </form>

@@ -2,8 +2,9 @@ class TrainingsController < ApplicationController
   before_action :get_date
   
   def new
-    @trainer_id = current_account.group.trainer.id
-    # ToDo: get groups
+    @trainer = current_account.group.trainer
+    @trainer_id = @trainer.id
+    @trainings = @trainer.trainings
   end
 
   def edit

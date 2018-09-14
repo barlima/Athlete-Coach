@@ -5,7 +5,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
 import TrainingGroups from './TrainingGroups';
-import TrainingDetails from './TrainingDetails'
+import TrainingDetailsWrapper from './TrainingDetails/TrainingDetailsWrapper'
 
 // ToDo: 
 // Create components to fetch altheltes and deploy them to groups
@@ -34,7 +34,12 @@ class NewTraining extends React.Component {
             />
             <Route 
               path="/trainings/new/:date" 
-              component={TrainingDetails} 
+              component={TrainingDetailsWrapper} 
+              exact={true}
+            />
+            <Route
+              path="/trainings/new/:date/:id"
+              component={TrainingDetailsWrapper} 
               exact={true}
             />
           </Switch>

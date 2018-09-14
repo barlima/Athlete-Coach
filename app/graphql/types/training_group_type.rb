@@ -3,5 +3,9 @@ Types::TrainingGroupType = GraphQL::ObjectType.define do
 
   field :id, !types.ID
   field :name, !types.String
-  field :athlete_ids, types[types.Int]
+  field :athlete_ids, types[types.Int] do
+    resolve -> (obj, args, ctx) {
+      obj.athletes.map(&:id)
+    }
+  end
 end
