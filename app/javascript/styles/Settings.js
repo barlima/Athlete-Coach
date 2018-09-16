@@ -1,5 +1,6 @@
 export const darkRed = "#ac0000";
 export const red = "#fe0000";
+export const lightRed = "#ff7f7f";
 export const darkGreen = "#0f820f";
 export const green = "#17cc17";
 export const lightGreen = "#a0e5a0";
