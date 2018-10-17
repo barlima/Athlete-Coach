@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { red, darkRed, darkGreen, lightGreen, sSize, mSize, xmSize, lSize, green } from '../../../styles/Settings';
 import TrainingElement from './TrainingElement';
 import TrainingPanel from './TrainingPanel';
+import AthletesMenu from './AthletesMenu';
 
 const NoExcercises = styled.p`
   margin-top: 3rem;
@@ -17,6 +18,10 @@ const Panel = styled.div`
   display: flex;
   justify-content: center;
   margin-top: ${lSize};
+`;
+
+const Groups = styled.div`
+  display: flex;
 `;
 
 const Wrapper = styled.div`
@@ -72,7 +77,7 @@ const SaveButton = styled.button`
 const GroupsDropdown = styled(Dropdown)`
   background: ${lightGreen};
   border-radius: 0.5rem;
-  flex: 1;
+  // flex: 1;
   width: 40rem;
   
   div.Dropdown-control {
@@ -121,6 +126,11 @@ class TrainingDetails extends React.Component {
   _onSelect = (option) => {
     const trainingDate = this.props.match.params.date;
     this.props.history.push(`/trainings/new/${trainingDate}/${option.value}`);
+  };
+
+  toggleMenu = () => {
+    const dropdown = document.getElementsByClassName("Dropdown-menu");
+    console.log(dropdown);
   };
 
   nameWithCount = (group) => {
@@ -274,16 +284,27 @@ class TrainingDetails extends React.Component {
   render() {
     return(
       <Wrapper>
-        <GroupsDropdown 
-          options={this.props.training.training_groups.map((group) => (
-            {
-              value: group.id, 
-              label: this.nameWithCount(group)
-            }
-          ))}
-          value={this.props.match.params.id || this.nameWithCount(this.props.training.training_groups[0])}
-          onChange={this._onSelect}
-        />
+        <Groups>
+          <AthletesMenu 
+            options={this.props.training.training_groups.map((group) => (
+              {
+                value: group.id, 
+                label: this.nameWithCount(group)
+              }
+            ))}
+            onChange={this._onSelect}
+          />
+          <GroupsDropdown 
+            options={this.props.training.training_groups.map((group) => (
+              {
+                value: group.id, 
+                label: this.nameWithCount(group)
+              }
+            ))}
+            value={this.props.match.params.id || this.nameWithCount(this.props.training.training_groups[0])}
+            onChange={this._onSelect}
+          />
+        </Groups>
         <Panel>
           <Athletes>
             <h3>Athletes:</h3>

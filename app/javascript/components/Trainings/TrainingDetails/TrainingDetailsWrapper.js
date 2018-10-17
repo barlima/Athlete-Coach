@@ -1,7 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import styled from 'styled-components';
 import {Link, NavLink} from 'react-router-dom';
 import TrainingDetails from './TrainingDetails';
 
